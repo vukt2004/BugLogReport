@@ -1,0 +1,292 @@
+[
+  {
+    "ID": "B01",
+    "Description": "Login Test - Đăng nhập vào hệ thống nhưng email/password không đúng",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1PbFBfU7L4SJp0JQSrEkQfRbY-qyeq89a/view?usp=sharing",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC01-05/TC01-06",
+    "Case": "Login"
+  },
+  {
+    "ID": "B02",
+    "Description": "Login Test - Đăng nhập vào hệ thống nhưng tài khoản đã bị xóa",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1C-Q6jfeMRy_RrZfAsRvw19lnRWf3Hyxm/view?usp=sharing",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC01-07",
+    "Case": "Login"
+  },
+  {
+    "ID": "B03",
+    "Description": "Test Create - Tạo mới 1 nhân sự với tên nhân sự để trống",
+    "Reason": "Thông báo trả về trong form chưa việt hóa",
+    "Image": "https://drive.google.com/file/d/1rwPKlETrbwC7MFDfRHblOfzi3Tn3GPT6/view?usp=sharing",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-02",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B04",
+    "Description": "Test Create - Tạo mới 1 nhân sự với tên nhân sự nhập khoảng trắng",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/17K1qUNUDLWpzOAsSLZZOs7WvNzWzVt6K/view?usp=sharing",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-03",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B05",
+    "Description": "Test Create - Tạo mới 1 nhân sự với Danh xưng để trống",
+    "Reason": "Thông báo trả về trong form chưa việt hóa",
+    "Image": "https://drive.google.com/file/d/1UHzEeuLEN87vsAX_PPoKZ3evkNSm8qyC/view?usp=sharing",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-04",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B06",
+    "Description": "Test Create - Tạo mới 1 nhân sự với Danh xưng nhập khoảng trắng",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1Qux36X9fGZml59-10sqz2UJETQBEpGnG/view?usp=sharing",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-05",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B07",
+    "Description": "Test Create - Tạo mới 1 nhân sự với SĐT để trống",
+    "Reason": "Thông báo trả về trong form chưa việt hóa",
+    "Image": "https://drive.google.com/file/d/1zPaPTTYHcN53qYj0r1GldAiletdMOWrP/view?usp=sharing",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-06",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B08",
+    "Description": "Test Create - Tạo mới 1 nhân sự mà không chọn Phòng ban",
+    "Reason": "Thông báo trả về trong form chưa việt hóa",
+    "Image": "https://drive.google.com/file/d/1bXqMUSDYOwcqAecTpKeDZs1Qlk2fyHMb/view?usp=sharing",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-11",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B09",
+    "Description": "Test Create - Tạo mới 1 nhân sự mà không chọn Nhóm nhân sự",
+    "Reason": "Thông báo trả về trong form chưa việt hóa",
+    "Image": "https://drive.google.com/file/d/1jHGsVTSgou9DoURf_l0zLhVfxjpCixKS/view?usp=sharing",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-12",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B10",
+    "Description": "Test Create - Tạo mới 1 nhân sự với email để trống",
+    "Reason": "Thông báo trả về trong form chưa việt hóa",
+    "Image": "https://drive.google.com/file/d/15bTvsEM_IctDoZ6nj6MYqcIshMue8RKj/view?usp=sharing",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-13",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B11",
+    "Description": "Test Create - Tạo mới 1 nhân sự với email nhập khoảng trắng",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1nbxuPei2Vd9SC7Rp_f3_iJ15Jh_9UOLg/view?usp=sharing",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-14",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B12",
+    "Description": "Test Create - Tạo mới 1 nhân sự với email không hợp lệ",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1Yk7cnTTpXhYUx455R037-T_KsvzBO7pG/view?usp=sharing",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-15",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B13",
+    "Description": "Test Create - Tạo mới 1 nhân sự với tên nhân sự chứa số",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1pKytDaobDcotSdvZbVV2PxDHN9jWswLj/view?usp=sharing",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-17",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B14",
+    "Description": "Test Create - Tạo mới 1 nhân sự với tên nhân sự chứa ký tự đặc biệt",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1MyohxrMm9yiJZ2vK1oZftkDGd1XDSwDz/view?usp=sharing",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-18",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B15",
+    "Description": "Test Create - Tạo mới 1 nhân sự với danh xưng chứa số",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1xZyVrmVwHfBXKaMZWDtMWXbRvi5K2bM3/view?usp=sharing",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-19",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B16",
+    "Description": "Test Create - Tạo mới 1 nhân sự với danh xưng chứa ký tự đặc biệt",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1QYnvDGN8QBhMKcpTO7NxqS1nKptAxp0B/view?usp=sharing",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-20",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B17",
+    "Description": "Test Update - Cập nhật 1 nhân sự  nhưng tên nhân sự có chứa số",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1rT4I78pbAkMXZPtYNGclKeEgdp2SEbov/view?usp=drive_link",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC03-02",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B18",
+    "Description": "Test Update - Cập nhật 1 nhân sự  nhưng tên nhân sự có chứa ký tự đặc biệt",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1xgqmuDGcyiJG9S0x9KohtngzCWLkoLTF/view?usp=drive_link",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC03-03",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B19",
+    "Description": "Test Update - Cập nhật 1 nhân sự  nhưng danh xưng có chứa số",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1uwmk48eMmJQfS0ZitWECCXqFZRhsDcvB/view?usp=drive_link",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC03-04",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B20",
+    "Description": "Test Update - Cập nhật 1 nhân sự  nhưng tên nhân sự có chứa ký tự đặc biệt",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1T6R0HJFixdZfzcPeHtTlqztE8PFr5i5m/view?usp=drive_link",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC03-05",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B21",
+    "Description": "Test Update - Xóa 1 nhân sự nhưng nhân sự đó dã được xóa",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1qnh44cgIQnyLRWtSBT1ElyocnNWQVUU2/view?usp=drive_link",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC04-02",
+    "Case": "Quản lý nhân sự"
+  },
+  {
+    "ID": "B22",
+    "Description": "Test Create - Tạo mới 1 nhóm nhân sự với tên để trống",
+    "Reason": "Thông báo trả về trong form chưa việt hóa",
+    "Image": "https://drive.google.com/file/d/1e5v4bXCN1KZlzYS4SdT_B2DSZw1aKKJA/view?usp=sharing",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-02",
+    "Case": "Quản lý nhóm nhân sự"
+  },
+  {
+    "ID": "B23",
+    "Description": "Test Create - Tạo mới 1 nhóm nhân sự với tên nhập khoảng trắng",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1S0jNrahU8cyFne8PTsjJfL1n8yQ285t-/view?usp=drive_link",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-03",
+    "Case": "Quản lý nhóm nhân sự"
+  },
+  {
+    "ID": "B24",
+    "Description": "Test Create - Tạo mới 1 nhóm nhân sự với tên chứa số",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1Wuvsnr7u-6jRtn7HydHeDFoz5t6lhBhC/view?usp=drive_link",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-04",
+    "Case": "Quản lý nhóm nhân sự"
+  },
+  {
+    "ID": "B25",
+    "Description": "Test Create - Tạo mới 1 nhóm nhân sự với tên chứa ký tự đặc biệt",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1Thy01qCqXqoMYebdxesKILCzvRk47kIj/view?usp=drive_link",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-05",
+    "Case": "Quản lý nhóm nhân sự"
+  },
+  {
+    "ID": "B26",
+    "Description": "Test Create - Tạo mới 1 nhóm nhân sự với tên quá dài",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1_t03VJIf0DwH53tgUWFJp49igVFgCaow/view?usp=drive_link",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC02-06",
+    "Case": "Quản lý nhóm nhân sự"
+  },
+  {
+    "ID": "B27",
+    "Description": "Test Update - Cập nhật 1 nhóm nhân sự nhưng tên chứa số",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1W7yVb71zEQzM0n_rZExxq_JlueIinrO-/view?usp=drive_link",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC03-02",
+    "Case": "Quản lý nhóm nhân sự"
+  },
+  {
+    "ID": "B28",
+    "Description": "Test Update - Cập nhật 1 nhóm nhân sự nhưng tên chứa ký tự đặc biệt",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1QvVYfzQKdoKZK9acYVpv6uR8-6X_lXdL/view?usp=drive_link",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC03-03",
+    "Case": "Quản lý nhóm nhân sự"
+  },
+  {
+    "ID": "B29",
+    "Description": "Test Update - Cập nhật 1 nhóm nhân sự nhưng tên quá dài",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/14rMZ8-P3EQKiXYFE0xHqCMHnkRsI_vFT/view?usp=drive_link",
+    "Status": "Bug",
+    "Date": "2025-05-20T17:00:00.000Z",
+    "TestID": "TC03-04",
+    "Case": "Quản lý nhóm nhân sự"
+  }
+]

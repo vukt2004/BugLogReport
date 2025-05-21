@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bug Tracker by Case</title>
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --success: #38b000;
+      --danger: #e63946;
+      --gray-light: #f8f9fa;
+      --gray: #e9ecef;
+      --dark: #212529;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --radius: 8px;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background-color: #f0f4f8;
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      background-color: white;
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary);
+    }
+    
+    .bug-icon {
+      font-size: 2rem;
+    }
+    
+    .content-area {
+      background-color: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    
+    .tabs {
+      display: flex;
+      gap: 5px;
+      padding: 5px;
+      background-color: var(--gray-light);
+      border-bottom: 1px solid var(--gray);
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+    
+    .tab {
+      padding: 12px 20px;
+      background: white;
+      color: var(--dark);
+      border: none;
+      cursor: pointer;
+      border-radius: var(--radius);
+      font-weight: 500;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      border: 1px solid transparent;
+    }
+    
+    .tab:hover {
+      background: var(--gray-light);
+      border-color: var(--gray);
+    }
+    
+    .tab.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+    
+    .tab-content {
+      display: none;
+      padding: 20px;
+    }
+    
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    
+    thead {
+      background-color: var(--gray-light);
+    }
+    
+    th {
+      padding: 15px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--dark);
+      border-bottom: 2px solid var(--gray);
+    }
+    
+    td {
+      padding: 15px;
+      border-bottom: 1px solid var(--gray);
+      vertical-align: middle;
+    }
+    
+    tr:hover {
+      background-color: var(--gray-light);
+    }
+    
+    tr:last-child td {
+      border-bottom: none;
+    }
+    
+    img {
+      max-width: 100px;
+      max-height: 100px;
+      border-radius: 4px;
+      object-fit: cover;
+      border: 1px solid var(--gray);
+      transition: transform 0.2s ease;
+    }
+    
+    img:hover {
+      transform: scale(1.05);
+    }
+    
+    .status {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      text-align: center;
+      min-width: 80px;
+    }
+    
+    .status-bug {
+      background-color: rgba(230, 57, 70, 0.15);
+      color: var(--danger);
+      border: 1px solid rgba(230, 57, 70, 0.3);
+    }
+    
+    .status-fix {
+      background-color: rgba(56, 176, 0, 0.15);
+      color: var(--success);
+      border: 1px solid rgba(56, 176, 0, 0.3);
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--primary);
+      font-weight: 500;
+    }
+    
+    .error {
+      background-color: rgba(230, 57, 70, 0.1);
+      border-left: 4px solid var(--danger);
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 4px;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+      
+      header {
+        padding: 15px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+      
+      th, td {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><span class="bug-icon">🐞</span> Bug Log Dashboard</h1>
+    </header>
+
+    <div class="content-area">
+      <div class="tabs" id="tabs"></div>
+      <div id="tabContents">
+        <div class="loading">Đang tải data...</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    fetch('bugs.json')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
+      .then(data => {
+        document.querySelector('.loading').remove();
+        
+        const cases = [...new Set(data.map(bug => bug.Case))].filter(Boolean);
+        const tabsContainer = document.getElementById('tabs');
+        const contentsContainer = document.getElementById('tabContents');
+
+        cases.forEach((caseName, index) => {
+          // Create tab button
+          const tabBtn = document.createElement('button');
+          tabBtn.textContent = caseName;
+          tabBtn.className = 'tab' + (index === 0 ? ' active' : '');
+          tabBtn.dataset.case = caseName;
+          tabsContainer.appendChild(tabBtn);
+
+          // Create content table for this tab
+          const tabContent = document.createElement('div');
+          tabContent.className = 'tab-content' + (index === 0 ? ' active' : '');
+          tabContent.id = `tab-${caseName}`;
+
+          const filtered = data.filter(b => b.Case === caseName);
+          
+          // Add bug count to the tab
+          tabBtn.textContent = `${caseName} (${filtered.length})`;
+          
+          let tableHTML = `
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Mô tả test case</th>
+                  <th>Lý do bug</th>
+                  <th>Hình ảnh</th>
+                  <th>Trạng thái</th>
+                  <th>Ngày log</th>
+                </tr>
+              </thead>
+              <tbody>
+          `;
+
+          if (filtered.length === 0) {
+            tableHTML += `
+              <tr>
+                <td colspan="5" style="text-align: center;">No bugs found for this case</td>
+              </tr>
+            `;
+          } else {
+            filtered.forEach(bug => {
+              tableHTML += `
+                <tr>
+                  <td>${bug.ID || '—'}</td>
+                  <td>${bug.Description || '—'}</td>
+                  <td>${bug.Reason || '—'}</td>
+                  <td>${bug.Image ? `<a href="${bug.Image}" target="_blank" rel="noopener noreferrer">${bug.TestID}</a>` : '—'}</td>
+                  <td><span class="status ${bug.Status === 'Bug' ? 'status-bug' : 'status-fix'}">${bug.Status || '—'}</span></td>
+                  <td>${bug.Date || '—'}</td>
+                </tr>
+              `;
+            });
+          }
+
+          tableHTML += `</tbody></table>`;
+          tabContent.innerHTML = tableHTML;
+          contentsContainer.appendChild(tabContent);
+
+          // Add tab click event
+          tabBtn.addEventListener('click', () => {
+            document.querySelectorAll('.tab').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(div => div.classList.remove('active'));
+
+            tabBtn.classList.add('active');
+            tabContent.classList.add('active');
+          });
+        });
+      })
+      .catch(err => {
+        document.querySelector('.loading').remove();
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error';
+        errorDiv.innerHTML = `
+          <p><strong>❌ Error loading data:</strong> Could not fetch bugs.json</p>
+          <p>Please check your connection or file path and try again.</p>
+        `;
+        document.getElementById('tabContents').appendChild(errorDiv);
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
