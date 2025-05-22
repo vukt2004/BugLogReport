@@ -496,6 +496,31 @@
       margin-bottom: 1rem;
       color: var(--gray-300);
     }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--white);
+      border: 1px solid var(--gray-300);
+      border-radius: var(--radius);
+      padding: 0.5rem 0.75rem;
+      flex: 1;
+      max-width: 300px;
+    }
+
+    .search-box i {
+      color: var(--gray-500);
+    }
+
+    .search-input {
+      border: none;
+      outline: none;
+      flex: 1;
+      font-size: 0.875rem;
+      color: var(--gray-800);
+      background: transparent;
+    }
     
     /* Responsive Design */
     @media (max-width: 1024px) {
@@ -702,6 +727,10 @@
                     </button>
                   </div>
                 </div>
+                <div class="search-box">
+                  <i class="fas fa-search"></i>
+                  <input type="text" class="search-input" placeholder="Tìm kiếm mô tả hoặc lý do..." />
+                </div>
                 <div class="results-count">
                   <i class="fas fa-chart-bar"></i>
                   Hiển thị: <span class="count-badge">${filtered.length}</span> / ${filtered.length}
@@ -780,7 +809,28 @@
                   } else {
                     row.style.display = 'none';
                   }
-                });
+                })});
+
+                // Search functionality
+                const searchInput = tabContent.querySelector('.search-input');
+                searchInput.addEventListener('input', () => {
+                  const keyword = searchInput.value.toLowerCase();
+                  let visibleCount = 0;
+
+                  tableRows.forEach(row => {
+                    const desc = row.cells[1].textContent.toLowerCase();
+                    const reason = row.cells[2].textContent.toLowerCase();
+                    const matches = desc.includes(keyword) || reason.includes(keyword);
+                    const filterVal = tabContent.querySelector('.filter-btn.active').dataset.filter;
+                    const matchesFilter = filterVal === 'all' || row.dataset.status === filterVal;
+
+                    if (matches && matchesFilter) {
+                      row.style.display = '';
+                      visibleCount++;
+                    } else {
+                      row.style.display = 'none';
+                    }
+                  });
                 
                 // Update count
                 countBadge.textContent = visibleCount;
