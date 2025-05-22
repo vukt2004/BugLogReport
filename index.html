@@ -243,18 +243,94 @@
     .filter-section {
       background: var(--gray-50);
       border-bottom: 1px solid var(--gray-200);
-      padding: 1rem 1.5rem;
+      padding: 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.5rem;
+    }
+    
+    .filter-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .filter-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
     }
     
     .filter-group {
       display: flex;
       align-items: center;
       gap: 0.75rem;
+    }
+    
+    .search-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .search-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    
+    .search-input {
+      padding: 0.625rem 1rem 0.625rem 2.5rem;
+      border: 1px solid var(--gray-300);
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      width: 280px;
+      background: var(--white);
+      color: var(--gray-700);
+      transition: all 0.2s ease;
+    }
+    
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+    
+    .search-input::placeholder {
+      color: var(--gray-400);
+    }
+    
+    .search-icon {
+      position: absolute;
+      left: 0.75rem;
+      color: var(--gray-400);
+      pointer-events: none;
+    }
+    
+    .clear-search {
+      position: absolute;
+      right: 0.75rem;
+      color: var(--gray-400);
+      cursor: pointer;
+      padding: 0.25rem;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+      display: none;
+    }
+    
+    .clear-search:hover {
+      color: var(--gray-600);
+      background: var(--gray-100);
+    }
+    
+    .clear-search.show {
+      display: block;
     }
     
     .filter-label {
@@ -264,6 +340,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      white-space: nowrap;
     }
     
     .filter-buttons {
@@ -285,6 +362,7 @@
       display: flex;
       align-items: center;
       gap: 0.375rem;
+      white-space: nowrap;
     }
     
     .filter-btn:hover {
@@ -321,6 +399,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      white-space: nowrap;
     }
     
     .count-badge {
@@ -329,6 +408,13 @@
       padding: 0.25rem 0.5rem;
       border-radius: 9999px;
       font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .search-highlight {
+      background: rgba(255, 255, 0, 0.3);
+      padding: 0.1rem 0.2rem;
+      border-radius: 0.2rem;
       font-weight: 600;
     }
     
@@ -496,31 +582,6 @@
       margin-bottom: 1rem;
       color: var(--gray-300);
     }
-
-    .search-box {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--white);
-      border: 1px solid var(--gray-300);
-      border-radius: var(--radius);
-      padding: 0.5rem 0.75rem;
-      flex: 1;
-      max-width: 300px;
-    }
-
-    .search-box i {
-      color: var(--gray-500);
-    }
-
-    .search-input {
-      border: none;
-      outline: none;
-      flex: 1;
-      font-size: 0.875rem;
-      color: var(--gray-800);
-      background: transparent;
-    }
     
     /* Responsive Design */
     @media (max-width: 1024px) {
@@ -570,6 +631,19 @@
         padding: 1rem;
         flex-direction: column;
         align-items: stretch;
+        gap: 1rem;
+      }
+      
+      .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+      }
+      
+      .filter-left {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
       }
       
       .filter-group {
@@ -578,12 +652,26 @@
         gap: 0.5rem;
       }
       
+      .search-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+      }
+      
+      .search-input {
+        width: 100%;
+      }
+      
       .filter-buttons {
         justify-content: center;
       }
       
       .filter-btn {
         flex: 1;
+        justify-content: center;
+      }
+      
+      .results-count {
         justify-content: center;
       }
       
@@ -661,233 +749,6 @@
     </div>
   </div>
 
-  <script>
-    fetch('bugs.json')
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return res.json();
-      })
-      .then(data => {
-        document.querySelector('.loading').remove();
-        
-        const cases = [...new Set(data.map(bug => bug.Case))].filter(Boolean);
-        const tabsContainer = document.getElementById('tabs');
-        const contentsContainer = document.getElementById('tabContents');
-
-        cases.forEach((caseName, index) => {
-          const filtered = data.filter(b => b.Case === caseName);
-          
-          // Create tab button
-          const tabBtn = document.createElement('button');
-          tabBtn.className = 'tab' + (index === 0 ? ' active' : '');
-          tabBtn.dataset.case = caseName;
-          tabBtn.innerHTML = `
-            <i class="fas fa-folder"></i>
-            <span>${caseName}</span>
-            <span class="tab-badge">${filtered.length}</span>
-          `;
-          tabsContainer.appendChild(tabBtn);
-
-          // Create content table for this tab
-          const tabContent = document.createElement('div');
-          tabContent.className = 'tab-content' + (index === 0 ? ' active' : '');
-          tabContent.id = `tab-${caseName}`;
-
-          if (filtered.length === 0) {
-            tabContent.innerHTML = `
-              <div class="empty-state">
-                <i class="fas fa-clipboard-check"></i>
-                <h3>Không có bug nào</h3>
-                <p>Test case này chưa có bug được ghi nhận.</p>
-              </div>
-            `;
-          } else {
-            // Create filter section
-            const filterHTML = `
-              <div class="filter-section">
-                <div class="filter-group">
-                  <div class="filter-label">
-                    <i class="fas fa-filter"></i>
-                    Lọc theo trạng thái:
-                  </div>
-                  <div class="filter-buttons">
-                    <button class="filter-btn filter-all active" data-filter="all">
-                      <i class="fas fa-list"></i>
-                      Tất cả
-                    </button>
-                    <button class="filter-btn filter-bug" data-filter="Bug">
-                      <i class="fas fa-bug"></i>
-                      Bug
-                    </button>
-                    <button class="filter-btn filter-fix" data-filter="Fix">
-                      <i class="fas fa-check-circle"></i>
-                      Đã sửa
-                    </button>
-                  </div>
-                </div>
-                <div class="search-box">
-                  <i class="fas fa-search"></i>
-                  <input type="text" class="search-input" placeholder="Tìm kiếm mô tả hoặc lý do..." />
-                </div>
-                <div class="results-count">
-                  <i class="fas fa-chart-bar"></i>
-                  Hiển thị: <span class="count-badge">${filtered.length}</span> / ${filtered.length}
-                </div>
-              </div>
-            `;
-            
-            let tableHTML = `
-              ${filterHTML}
-              <div class="table-container">
-                <table>
-                  <thead>
-                    <tr>
-                      <th><i class="fas fa-hashtag"></i> ID</th>
-                      <th><i class="fas fa-file-alt"></i> Mô tả test case</th>
-                      <th><i class="fas fa-exclamation-triangle"></i> Lý do bug</th>
-                      <th><i class="fas fa-image"></i> Hình ảnh</th>
-                      <th><i class="fas fa-flag"></i> Trạng thái</th>
-                      <th><i class="fas fa-calendar-alt"></i> Ngày log</th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-body">
-            `;
-
-            filtered.forEach(bug => {
-              const statusClass = bug.Status === 'Bug' ? 'status-bug' : 'status-fix';
-              
-              tableHTML += `
-                <tr data-status="${bug.Status}">
-                  <td><strong>${bug.ID || '—'}</strong></td>
-                  <td>${bug.Description || '—'}</td>
-                  <td>${bug.Reason || '—'}</td>
-                  <td>
-                    ${bug.Image ? 
-                      `<a href="${bug.Image}" target="_blank" rel="noopener noreferrer" class="image-link">
-                        <i class="fas fa-external-link-alt"></i>
-                        ${bug.TestID || 'Xem ảnh'}
-                      </a>` : 
-                      '<span style="color: var(--gray-400);">—</span>'
-                    }
-                  </td>
-                  <td>
-                    <span class="status ${statusClass}">
-                      <span class="status-icon"></span>
-                      ${bug.Status || '—'}
-                    </span>
-                  </td>
-                  <td>${bug.Date || '—'}</td>
-                </tr>
-              `;
-            });
-
-            tableHTML += `</tbody></table></div>`;
-            tabContent.innerHTML = tableHTML;
-            
-            // Add filter functionality
-            const filterButtons = tabContent.querySelectorAll('.filter-btn');
-            const tableRows = tabContent.querySelectorAll('tbody tr');
-            const countBadge = tabContent.querySelector('.count-badge');
-            const totalCount = filtered.length;
-            
-            filterButtons.forEach(btn => {
-              btn.addEventListener('click', () => {
-                // Update active button
-                filterButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                const filterValue = btn.dataset.filter;
-                let visibleCount = 0;
-                
-                tableRows.forEach(row => {
-                  const rowStatus = row.dataset.status;
-                  if (filterValue === 'all' || rowStatus === filterValue) {
-                    row.style.display = '';
-                    visibleCount++;
-                  } else {
-                    row.style.display = 'none';
-                  }
-                })});
-
-                // Search functionality
-                const searchInput = tabContent.querySelector('.search-input');
-                searchInput.addEventListener('input', () => {
-                  const keyword = searchInput.value.toLowerCase();
-                  let visibleCount = 0;
-
-                  tableRows.forEach(row => {
-                    const desc = row.cells[1].textContent.toLowerCase();
-                    const reason = row.cells[2].textContent.toLowerCase();
-                    const matches = desc.includes(keyword) || reason.includes(keyword);
-                    const filterVal = tabContent.querySelector('.filter-btn.active').dataset.filter;
-                    const matchesFilter = filterVal === 'all' || row.dataset.status === filterVal;
-
-                    if (matches && matchesFilter) {
-                      row.style.display = '';
-                      visibleCount++;
-                    } else {
-                      row.style.display = 'none';
-                    }
-                  });
-                
-                // Update count
-                countBadge.textContent = visibleCount;
-                
-                // Show empty state if no results
-                const tableContainer = tabContent.querySelector('.table-container');
-                const existingEmpty = tabContent.querySelector('.filter-empty-state');
-                
-                if (visibleCount === 0) {
-                  if (!existingEmpty) {
-                    const emptyState = document.createElement('div');
-                    emptyState.className = 'filter-empty-state empty-state';
-                    emptyState.innerHTML = `
-                      <i class="fas fa-search"></i>
-                      <h3>Không tìm thấy kết quả</h3>
-                      <p>Không có bug nào với trạng thái "${btn.textContent.trim()}"</p>
-                    `;
-                    tableContainer.appendChild(emptyState);
-                  }
-                  tableContainer.querySelector('table').style.display = 'none';
-                } else {
-                  if (existingEmpty) {
-                    existingEmpty.remove();
-                  }
-                  tableContainer.querySelector('table').style.display = 'table';
-                }
-              });
-            });
-          }
-          
-          contentsContainer.appendChild(tabContent);
-
-          // Add tab click event
-          tabBtn.addEventListener('click', () => {
-            document.querySelectorAll('.tab').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(div => div.classList.remove('active'));
-
-            tabBtn.classList.add('active');
-            tabContent.classList.add('active');
-          });
-        });
-      })
-      .catch(err => {
-        document.querySelector('.loading').remove();
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'error';
-        errorDiv.innerHTML = `
-          <div class="error-title">
-            <i class="fas fa-exclamation-triangle"></i>
-            Lỗi tải dữ liệu
-          </div>
-          <p>Không thể tải file bugs.json. Vui lòng kiểm tra kết nối mạng hoặc đường dẫn file và thử lại.</p>
-          <p><strong>Chi tiết lỗi:</strong> ${err.message}</p>
-        `;
-        document.getElementById('tabContents').appendChild(errorDiv);
-        console.error(err);
-      });
-  </script>
+  <script src="Script.js"></script>
 </body>
 </html>
