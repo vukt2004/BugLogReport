@@ -239,6 +239,99 @@
       animation: fadeIn 0.3s ease-in-out;
     }
     
+    /* Filter Section */
+    .filter-section {
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .filter-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--gray-700);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .filter-buttons {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    
+    .filter-btn {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--gray-300);
+      background: var(--white);
+      color: var(--gray-600);
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+    }
+    
+    .filter-btn:hover {
+      background: var(--gray-100);
+      border-color: var(--gray-400);
+    }
+    
+    .filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+    
+    .filter-btn.filter-all.active {
+      background: var(--gray-700);
+      border-color: var(--gray-700);
+    }
+    
+    .filter-btn.filter-bug.active {
+      background: var(--danger);
+      border-color: var(--danger);
+    }
+    
+    .filter-btn.filter-fix.active {
+      background: var(--success);
+      border-color: var(--success);
+    }
+    
+    .results-count {
+      font-size: 0.875rem;
+      color: var(--gray-500);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .count-badge {
+      background: var(--primary);
+      color: var(--white);
+      padding: 0.25rem 0.5rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
@@ -448,6 +541,27 @@
         font-size: 0.8125rem;
       }
       
+      .filter-section {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .filter-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+      }
+      
+      .filter-buttons {
+        justify-content: center;
+      }
+      
+      .filter-btn {
+        flex: 1;
+        justify-content: center;
+      }
+      
       th, td {
         padding: 0.75rem 0.5rem;
         font-size: 0.875rem;
@@ -565,7 +679,38 @@
               </div>
             `;
           } else {
+            // Create filter section
+            const filterHTML = `
+              <div class="filter-section">
+                <div class="filter-group">
+                  <div class="filter-label">
+                    <i class="fas fa-filter"></i>
+                    Lọc theo trạng thái:
+                  </div>
+                  <div class="filter-buttons">
+                    <button class="filter-btn filter-all active" data-filter="all">
+                      <i class="fas fa-list"></i>
+                      Tất cả
+                    </button>
+                    <button class="filter-btn filter-bug" data-filter="Bug">
+                      <i class="fas fa-bug"></i>
+                      Bug
+                    </button>
+                    <button class="filter-btn filter-fix" data-filter="Fix">
+                      <i class="fas fa-check-circle"></i>
+                      Đã sửa
+                    </button>
+                  </div>
+                </div>
+                <div class="results-count">
+                  <i class="fas fa-chart-bar"></i>
+                  Hiển thị: <span class="count-badge">${filtered.length}</span> / ${filtered.length}
+                </div>
+              </div>
+            `;
+            
             let tableHTML = `
+              ${filterHTML}
               <div class="table-container">
                 <table>
                   <thead>
@@ -573,20 +718,19 @@
                       <th><i class="fas fa-hashtag"></i> ID</th>
                       <th><i class="fas fa-file-alt"></i> Mô tả test case</th>
                       <th><i class="fas fa-exclamation-triangle"></i> Lý do bug</th>
-                      <th><i class="fas fa-image"></i> Hình ảnh/Video</th>
+                      <th><i class="fas fa-image"></i> Hình ảnh</th>
                       <th><i class="fas fa-flag"></i> Trạng thái</th>
                       <th><i class="fas fa-calendar-alt"></i> Ngày log</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody class="table-body">
             `;
 
             filtered.forEach(bug => {
               const statusClass = bug.Status === 'Bug' ? 'status-bug' : 'status-fix';
-              const statusIcon = bug.Status === 'Bug' ? 'fas fa-times-circle' : 'fas fa-check-circle';
               
               tableHTML += `
-                <tr>
+                <tr data-status="${bug.Status}">
                   <td><strong>${bug.ID || '—'}</strong></td>
                   <td>${bug.Description || '—'}</td>
                   <td>${bug.Reason || '—'}</td>
@@ -612,6 +756,59 @@
 
             tableHTML += `</tbody></table></div>`;
             tabContent.innerHTML = tableHTML;
+            
+            // Add filter functionality
+            const filterButtons = tabContent.querySelectorAll('.filter-btn');
+            const tableRows = tabContent.querySelectorAll('tbody tr');
+            const countBadge = tabContent.querySelector('.count-badge');
+            const totalCount = filtered.length;
+            
+            filterButtons.forEach(btn => {
+              btn.addEventListener('click', () => {
+                // Update active button
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filterValue = btn.dataset.filter;
+                let visibleCount = 0;
+                
+                tableRows.forEach(row => {
+                  const rowStatus = row.dataset.status;
+                  if (filterValue === 'all' || rowStatus === filterValue) {
+                    row.style.display = '';
+                    visibleCount++;
+                  } else {
+                    row.style.display = 'none';
+                  }
+                });
+                
+                // Update count
+                countBadge.textContent = visibleCount;
+                
+                // Show empty state if no results
+                const tableContainer = tabContent.querySelector('.table-container');
+                const existingEmpty = tabContent.querySelector('.filter-empty-state');
+                
+                if (visibleCount === 0) {
+                  if (!existingEmpty) {
+                    const emptyState = document.createElement('div');
+                    emptyState.className = 'filter-empty-state empty-state';
+                    emptyState.innerHTML = `
+                      <i class="fas fa-search"></i>
+                      <h3>Không tìm thấy kết quả</h3>
+                      <p>Không có bug nào với trạng thái "${btn.textContent.trim()}"</p>
+                    `;
+                    tableContainer.appendChild(emptyState);
+                  }
+                  tableContainer.querySelector('table').style.display = 'none';
+                } else {
+                  if (existingEmpty) {
+                    existingEmpty.remove();
+                  }
+                  tableContainer.querySelector('table').style.display = 'table';
+                }
+              });
+            });
           }
           
           contentsContainer.appendChild(tabContent);

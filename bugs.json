@@ -94,7 +94,7 @@
     "TestID": "TC02-13",
     "Description": "Test Create - Tạo mới 1 nhân sự với email để trống",
     "Reason": "Thông báo trả về trong form chưa việt hóa",
-    "Image": "https://drive.google.com/file/d/15bTvsEM_IctDoZ6nj6MYqcIshMue8RKj/view?usp=sharing",
+    "Image": "https://drive.google.com/file/d/1aDYVkbEAiLCuTyKmkyGagZ5T8WDIag8l/view?usp=sharing",
     "Status": "Bug",
     "Date": "2025-05-20T17:00:00.000Z",
     "Case": "Quản lý nhân sự"
@@ -104,7 +104,7 @@
     "TestID": "TC02-14",
     "Description": "Test Create - Tạo mới 1 nhân sự với email nhập khoảng trắng",
     "Reason": "Thông báo trả về không đúng",
-    "Image": "https://drive.google.com/file/d/1nbxuPei2Vd9SC7Rp_f3_iJ15Jh_9UOLg/view?usp=sharing",
+    "Image": "https://drive.google.com/file/d/1i9HD_lkFlSqnmRqondzHN7qydIsxzmhq/view?usp=sharing",
     "Status": "Bug",
     "Date": "2025-05-20T17:00:00.000Z",
     "Case": "Quản lý nhân sự"
@@ -114,7 +114,7 @@
     "TestID": "TC02-15",
     "Description": "Test Create - Tạo mới 1 nhân sự với email không hợp lệ",
     "Reason": "Thông báo trả về không đúng",
-    "Image": "https://drive.google.com/file/d/1Yk7cnTTpXhYUx455R037-T_KsvzBO7pG/view?usp=sharing",
+    "Image": "https://drive.google.com/file/d/1YVrY7-iKACKdguyU2oBuDLYQWxrowp3c/view?usp=sharing",
     "Status": "Bug",
     "Date": "2025-05-20T17:00:00.000Z",
     "Case": "Quản lý nhân sự"
