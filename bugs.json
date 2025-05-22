@@ -598,5 +598,45 @@
     "Status": "Bug",
     "Date": "2025-05-21T17:00:00.000Z",
     "Case": "Quản lý phòng ban"
+  },
+  {
+    "ID": "B61",
+    "TestID": "TC02-03",
+    "Description": "Test Create - Tạo mới 1 chức vụ nhưng tên nhập khoảng trắng",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1TqU1LCouNKiCnF1BJVwpdUmlveaKDdKR/view?usp=drive_link",
+    "Status": "Bug",
+    "Date": "2025-05-21T17:00:00.000Z",
+    "Case": "Quản lý chức vụ"
+  },
+  {
+    "ID": "B62",
+    "TestID": "TC02-04",
+    "Description": "Test Create - Tạo mới 1 chức vụ nhưng tên nhập ký tự đặc biệt",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/19C150CoFgPLTkPSgoIcUevy97h8J5_3l/view?usp=drive_link",
+    "Status": "Bug",
+    "Date": "2025-05-21T17:00:00.000Z",
+    "Case": "Quản lý chức vụ"
+  },
+  {
+    "ID": "B63",
+    "TestID": "TC03-02",
+    "Description": "Test Update - Cập nhật 1 chức vụ nhưng tên chứa ký tự đặc biệt",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/1fV2yb57F6o0Bte6mwwRQi8XtTYMemYQG/view?usp=drive_link",
+    "Status": "Bug",
+    "Date": "2025-05-21T17:00:00.000Z",
+    "Case": "Quản lý chức vụ"
+  },
+  {
+    "ID": "B64",
+    "TestID": "TC04-02",
+    "Description": "Test Remove - Xóa 1 chức vụ đã xóa",
+    "Reason": "Thông báo trả về không đúng",
+    "Image": "https://drive.google.com/file/d/19EmK62YLcT40zMC7O0YcR26NONECL0fe/view?usp=drive_link",
+    "Status": "Bug",
+    "Date": "2025-05-21T17:00:00.000Z",
+    "Case": "Quản lý chức vụ"
   }
 ]
